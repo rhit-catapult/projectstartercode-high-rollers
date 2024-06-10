@@ -11,7 +11,6 @@ for suit in suits:
     img_Queens = pygame.image.load("Cards/card" + suit + "Q.png")
     img_Jacks = pygame.image.load("Cards/card" + suit + "J.png")
     img_Aces = pygame.image.load("Cards/card" + suit + "A.png")
-    img_Back = pygame.image.load("Cards/card" + "Back_red4.png")
     for i in range(2, 10):
         Numerical_Cards = pygame.image.load("Cards/card" + suit + str(i) + ".png")
 
@@ -69,8 +68,6 @@ carddict.update({"diamonds" : {"2": "cardDiamonds2.png",
                             "queen": "cardHeartsQ.png",
                             "king": "cardHeartsK.png",
                             "ace": "cardHeartsA.png"}})
-for k in range(13):
-    pass
 
 def randomcard():
     suites = ['hearts', 'diamonds', 'clubs', 'spades']
@@ -81,28 +78,31 @@ def randomcard():
 
     return card
 
-
+cards = []
 def cardlist():
     pygame.init()
-    cards = []
     while len(cards) < 13:
         randcard = randomcard()
         while not randcard in cards:
             cards.append(randcard)
 
-    print(cards)
 
 
 def main():
-    screen = pygame.display.set_mode((840, 680))
+    screen = pygame.display.set_mode((1400, 800))
+    pygame.display.set_caption("Poker")
     screen.fill((53, 101, 57))
-    cardchoice = carddict["diamonds"]["7"]
+    cardlist()
+    randcard = cards.pop(0)
+    randsuite = randcard.pop(1)
+    randvalue = randcard.pop(0)
+    cardchoice = carddict[randsuite][randvalue]
     img = pygame.image.load(f"Cards/{cardchoice}")
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
-        screen.blit(img, (screen.get_width()/2, screen.get_height()/2))
+        screen.blit(img, (420, 340))
         pygame.display.update()
 
 
