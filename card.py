@@ -67,7 +67,8 @@ carddict.update({"diamonds" : {"2": "cardDiamonds2.png",
                             "queen": "cardHeartsQ.png",
                             "king": "cardHeartsK.png",
                             "ace": "cardHeartsA.png"}})
-
+for k in range(13):
+    pass
 
 def randomcard():
     suites = ['hearts', 'diamonds', 'clubs', 'spades']
@@ -92,6 +93,7 @@ def cardlist():
 
 def main():
     screen = pygame.display.set_mode((840, 680))
+    screen.fill((53, 101, 57))
     cardchoice = carddict["diamonds"]["7"]
     img = pygame.image.load(f"Cards/{cardchoice}")
     while True:
