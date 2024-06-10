@@ -102,7 +102,7 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
-        screen.blit(img, (420, 340))
+        screen.blit(img, (420, 308))
         pygame.display.update()
 
 
