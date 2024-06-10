@@ -1,5 +1,6 @@
 import pygame
 import random
+import sys
 import time
 
 suits = ["Hearts", "Clubs", "Diamonds", "Spades"]
