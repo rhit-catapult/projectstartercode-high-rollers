@@ -93,7 +93,7 @@ def cardlist():
 
 
 def main():
-    screen = pygame.display.set_mode((840, 680))
+    screen = pygame.display.set_mode((1400, 800))
     screen.fill((53, 101, 57))
     cardchoice = carddict["diamonds"]["7"]
     img = pygame.image.load(f"Cards/{cardchoice}")
