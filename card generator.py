@@ -14,7 +14,6 @@ def randomcard():
 
 
 def main():
-    # turn on pygame
     pygame.init()
     cards = []
     while len(cards) < 13:
