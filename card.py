@@ -22,7 +22,7 @@ def randomcard():
     return card
 
 
-def main():
+def cardlist():
     pygame.init()
     cards = []
     while len(cards) < 13:
@@ -33,4 +33,25 @@ def main():
     print(cards)
 
 
-main()
+def main():
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
