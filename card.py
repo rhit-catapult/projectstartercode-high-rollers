@@ -86,7 +86,6 @@ def cardlist():
         while not randcard in cards:
             cards.append(randcard)
 
-
 def main():
     screen = pygame.display.set_mode((1400, 800))
     pygame.display.set_caption("Poker")
