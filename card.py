@@ -87,7 +87,6 @@ def cardlist():
             cards.append(randcard)
 
 
-
 def main():
     screen = pygame.display.set_mode((1400, 800))
     pygame.display.set_caption("Poker")
@@ -98,11 +97,25 @@ def main():
     randvalue = randcard.pop(0)
     cardchoice = carddict[randsuite][randvalue]
     img = pygame.image.load(f"Cards/{cardchoice}")
+    back_img = pygame.image.load(f"Cards/cardBack_red4.png")
+    face_up = False
+
+
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
-        screen.blit(img, (420, 340))
+
+            if event.type == pygame.KEYDOWN:
+                pressed_key = pygame.key.get_pressed()
+                if pressed_key[pygame.K_SPACE]:
+                    face_up = True
+
+        if face_up == True:
+            screen.blit(img, (420, 340))
+        else:
+            screen.blit(back_img, (420, 340))
         pygame.display.update()
 
 
