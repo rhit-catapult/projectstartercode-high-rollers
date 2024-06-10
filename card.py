@@ -1,5 +1,6 @@
 import pygame
 import random
+import time
 
 suits = ["Hearts", "Clubs", "Diamonds", "Spades"]
 carddict={}
@@ -11,6 +12,8 @@ for suit in suits:
     img_Aces = pygame.image.load("Cards/card" + suit + "A.png")
     for i in range(2, 10):
         Numerical_Cards = pygame.image.load("Cards/card" + suit + str(i) + ".png")
+
+    carddict.update({suit : {"k" : img_Kings}})
 
 carddict.update({"diamonds" : {"2": "cardDiamonds2.png",
                                 "3": "cardDiamonds3.png",
@@ -88,7 +91,16 @@ def cardlist():
 
 
 def main():
-    pass
+    screen = pygame.display.set_mode((840, 680))
+    cardchoice = carddict["diamonds"]["7"]
+    img = pygame.image.load(f"Cards/{cardchoice}")
+    while True:
+        screen.blit(img, (0, 0))
+        pygame.display.update()
+
+
+if __name__ == "__main__":
+    main()
 
 
 
