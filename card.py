@@ -6,16 +6,6 @@ import time
 suits = ["Hearts", "Clubs", "Diamonds", "Spades"]
 carddict = {}
 
-for suit in suits:
-    img_Kings = pygame.image.load("Cards/card" + suit + "K.png")
-    img_Queens = pygame.image.load("Cards/card" + suit + "Q.png")
-    img_Jacks = pygame.image.load("Cards/card" + suit + "J.png")
-    img_Aces = pygame.image.load("Cards/card" + suit + "A.png")
-    for i in range(2, 10):
-        Numerical_Cards = pygame.image.load("Cards/card" + suit + str(i) + ".png")
-
-    carddict.update({suit : {"k" : img_Kings}})
-
 carddict.update({"diamonds" : {"2": "cardDiamonds2.png",
                                 "3": "cardDiamonds3.png",
                                 "4": "cardDiamonds4.png",
@@ -86,40 +76,30 @@ def cardlist():
         while not randcard in cards:
             cards.append(randcard)
 
-def main():
-    screen = pygame.display.set_mode((1400, 800))
-    pygame.display.set_caption("Poker")
-    screen.fill((53, 101, 57))
-    cardlist()
-    randcard = cards.pop(0)
-    randsuite = randcard.pop(1)
-    randvalue = randcard.pop(0)
-    cardchoice = carddict[randsuite][randvalue]
-    img = pygame.image.load(f"Cards/{cardchoice}")
-    back_img = pygame.image.load(f"Cards/cardBack_red4.png")
-    face_up = False
+class Card:
+    def __init__(self, screen, cardnumber):
+        self.screen = screen
+        self.cardnumber = cardnumber
+        self.card = cards.pop(cardnumber)
+        self.suite = self.card.pop(1)
+        self.value = self.card.pop(0)
+        self.cardchoice = carddict[self.suite][self.value]
+        self.img = pygame.image.load(f"Cards/{self.cardchoice}")
+        self.back_img = pygame.image.load(f"Cards/cardBack_red4.png")
+        self.face_up = False
 
-
-
-    while True:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                sys.exit()
-
-            if event.type == pygame.KEYDOWN:
-                pressed_key = pygame.key.get_pressed()
-                if pressed_key[pygame.K_SPACE]:
-                    face_up = True
-
-        if face_up == True:
-            screen.blit(img, (420, 340))
+    def draw():
+        if self.face_up == True:
+            self.screen.blit(self.img, (420, 340))
         else:
-            screen.blit(back_img, (420, 340))
-        pygame.display.update()
+            self.screen.blit(self.back_img, (420, 340))
 
-
-if __name__ == "__main__":
-    main()
+        while True:
+            if event.type == pygame.KEYDOWN:
+                    pressed_key = pygame.key.get_pressed()
+                    if pressed_key[pygame.K_SPACE]:
+                        face_up = True
+            pygame.display.update()
 
 
 

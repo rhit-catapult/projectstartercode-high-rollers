@@ -2,20 +2,19 @@ import pygame
 import sys
 import random
 import time
+import card
+
 
 
 def main():
     # turn on pygame
     pygame.init()
-
-    # create a screen
-    pygame.display.set_caption("Poker")
-    # TODO: Change the size of the screen as you see fit!
     screen = pygame.display.set_mode((1400, 800))
-
-
-    # let's set the framerate
+    pygame.display.set_caption("Poker")
+    screen.fill((53, 101, 57))
+    card.cardlist()
     clock = pygame.time.Clock()
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
