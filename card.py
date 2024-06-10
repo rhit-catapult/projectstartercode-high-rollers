@@ -3,7 +3,7 @@ import random
 import time
 
 suits = ["Hearts", "Clubs", "Diamonds", "Spades"]
-carddict={}
+carddict = {}
 
 for suit in suits:
     img_Kings = pygame.image.load("Cards/card" + suit + "K.png")
@@ -95,6 +95,9 @@ def main():
     cardchoice = carddict["diamonds"]["7"]
     img = pygame.image.load(f"Cards/{cardchoice}")
     while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
         screen.blit(img, (0, 0))
         pygame.display.update()
 
