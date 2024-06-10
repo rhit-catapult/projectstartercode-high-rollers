@@ -11,7 +11,7 @@ def main():
     # create a screen
     pygame.display.set_caption("Poker")
     # TODO: Change the size of the screen as you see fit!
-    screen = pygame.display.set_mode((840, 680))
+    screen = pygame.display.set_mode((1400, 800))
 
 
     # let's set the framerate
