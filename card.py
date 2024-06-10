@@ -2,7 +2,7 @@ import pygame
 import random
 
 suits = ["Hearts", "Clubs", "Diamonds", "Spades"]
-carddict{}
+carddict={}
 
 for suit in suits:
     img_Kings = pygame.image.load("Cards/card" + suit + "K.png")
@@ -37,7 +37,7 @@ carddict.update({"diamonds" : {"2": "cardDiamonds2.png",
                             "jack": "cardSpadesJ.png",
                             "queen": "cardSpadesQ.png",
                             "king": "cardSpadesK.png",
-                            "ace": "cardSpadesA.png"}
+                            "ace": "cardSpadesA.png"},
                  "clubs" : {"2": "cardClubs2.png",
                             "3": "cardClubs3.png",
                             "4": "cardClubs4.png",
@@ -50,7 +50,7 @@ carddict.update({"diamonds" : {"2": "cardDiamonds2.png",
                             "jack": "cardClubsJ.png",
                             "queen": "cardClubsQ.png",
                             "king": "cardClubsK.png",
-                            "ace": "cardClubsA.png"}
+                            "ace": "cardClubsA.png"},
                  "hearts": {"2": "cardHearts2.png",
                             "3": "cardHearts3.png",
                             "4": "cardHearts4.png",
