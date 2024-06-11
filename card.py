@@ -86,35 +86,68 @@ class Card:
         self.cardchoice = carddict[self.suite][self.value]
         self.img = pygame.image.load(f"Cards/{self.cardchoice}")
         self.back_img = pygame.image.load(f"Cards/cardBack_red4.png")
-        self.face_up = False
 
-    def draw():
+        if cardnumber == 0:
+            self.x =
+            self.y =
+            self.face_up = True
+        if cardnumber == 1:
+            self.x =
+            self.y =
+            self.face_up = True
+        if cardnumber == 3:
+            self.x =
+            self.y =
+            self.face_up = False
+        if cardnumber == 4:
+            self.x =
+            self.y =
+            self.face_up = False
+        if cardnumber == 5:
+            self.x =
+            self.y =
+            self.face_up = False
+        if cardnumber == 6:
+            self.x =
+            self.y =
+            self.face_up = False
+        if cardnumber == 7:
+            self.x =
+            self.y =
+            self.face_up = False
+        if cardnumber == 8:
+            self.x =
+            self.y =
+            self.face_up = False
+        if cardnumber == 9:
+            self.x =
+            self.y =
+            self.face_up = False
+        if cardnumber == 10:
+            self.x =
+            self.y =
+            self.face_up = False
+        if cardnumber == 11:
+            self.x =
+            self.y =
+            self.face_up = False
+        if cardnumber == 12:
+            self.x =
+            self.y =
+            self.face_up = False
+
+    def draw(self):
         if self.face_up == True:
-            self.screen.blit(self.img, (420, 340))
+            self.screen.blit(self.img, (self.x, self.y))
         else:
-            self.screen.blit(self.back_img, (420, 340))
+            self.screen.blit(self.back_img, (self.x, self.y))
 
         while True:
             if event.type == pygame.KEYDOWN:
                     pressed_key = pygame.key.get_pressed()
                     if pressed_key[pygame.K_SPACE]:
-                        face_up = True
+                        self.face_up = True
             pygame.display.update()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
