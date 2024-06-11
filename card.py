@@ -62,8 +62,8 @@ carddict.update({"diamonds" : {"2": "cardDiamonds2.png",
 def randomcard():
     suites = ['hearts', 'diamonds', 'clubs', 'spades']
     values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'jack', 'queen', 'king', 'ace']
-    suite = suites.pop(random.randint(0,3))
-    value = values.pop(random.randint(0,12))
+    suite = suites[random.randint(0,3)]
+    value = values[random.randint(0,12)]
     card = [value, suite]
 
     return card
