@@ -167,8 +167,6 @@ class Card:
                 self.face_up = True
 
 
-
-
         if self.face_up == True:
             self.screen.blit(self.img, (self.x, self.y))
         else:
