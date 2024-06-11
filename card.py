@@ -68,19 +68,21 @@ def randomcard():
 
     return card
 
-cards = []
+
 def cardlist():
     pygame.init()
+    cards = []
     while len(cards) < 13:
         randcard = randomcard()
         while not randcard in cards:
             cards.append(randcard)
+    return cards
 
 class Card:
-    def __init__(self, screen, cardnumber):
+    def __init__(self, screen, cardnumber, cards):
         self.screen = screen
         self.cardnumber = cardnumber
-        self.card = cards.pop(cardnumber)
+        self.card = cards[self.cardnumber]
         self.suite = self.card.pop(1)
         self.value = self.card.pop(0)
         self.cardchoice = carddict[self.suite][self.value]
@@ -88,52 +90,62 @@ class Card:
         self.back_img = pygame.image.load(f"Cards/cardBack_red4.png")
 
         if cardnumber == 0:
-            self.x =
-            self.y =
+            self.x = 700
+            self.y = 600
             self.face_up = True
         if cardnumber == 1:
-            self.x =
-            self.y =
+            self.x = 550
+            self.y = 600
+            self.face_up = True
+        if cardnumber == 2:
+            self.x = 20
+            self.y = 400
+            self.img = pygame.transform.rotate(self.back_img, 270)
             self.face_up = True
         if cardnumber == 3:
-            self.x =
-            self.y =
-            self.face_up = False
+            self.x = 20
+            self.y = 250
+            self.img = pygame.transform.rotate(self.back_img, 270)
+            self.face_up = True
         if cardnumber == 4:
-            self.x =
-            self.y =
-            self.face_up = False
+            self.x = 550
+            self.y = 20
+            self.img = pygame.transform.rotate(self.back_img, 180)
+            self.face_up = True
         if cardnumber == 5:
-            self.x =
-            self.y =
-            self.face_up = False
+            self.x = 700
+            self.y = 20
+            self.img = pygame.transform.rotate(self.back_img, 180)
+            self.face_up = True
         if cardnumber == 6:
-            self.x =
-            self.y =
-            self.face_up = False
+            self.x = 1200
+            self.y = 250
+            self.img = pygame.transform.rotate(self.back_img, 90)
+            self.face_up = True
         if cardnumber == 7:
-            self.x =
-            self.y =
-            self.face_up = False
+            self.x = 1200
+            self.y = 400
+            self.img = pygame.transform.rotate(self.back_img, 90)
+            self.face_up = True
         if cardnumber == 8:
-            self.x =
-            self.y =
+            self.x = 325
+            self.y = 300
             self.face_up = False
         if cardnumber == 9:
-            self.x =
-            self.y =
+            self.x = 475
+            self.y = 300
             self.face_up = False
         if cardnumber == 10:
-            self.x =
-            self.y =
+            self.x = 625
+            self.y = 300
             self.face_up = False
         if cardnumber == 11:
-            self.x =
-            self.y =
+            self.x = 775
+            self.y = 300
             self.face_up = False
         if cardnumber == 12:
-            self.x =
-            self.y =
+            self.x = 925
+            self.y = 300
             self.face_up = False
 
     def draw(self):
@@ -141,14 +153,6 @@ class Card:
             self.screen.blit(self.img, (self.x, self.y))
         else:
             self.screen.blit(self.back_img, (self.x, self.y))
-
-        while True:
-            if event.type == pygame.KEYDOWN:
-                    pressed_key = pygame.key.get_pressed()
-                    if pressed_key[pygame.K_SPACE]:
-                        self.face_up = True
-            pygame.display.update()
-
 
 
 
