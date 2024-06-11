@@ -100,33 +100,35 @@ class Card:
         if cardnumber == 2:
             self.x = 20
             self.y = 400
-            self.img = pygame.transform.rotate(self.back_img, 270)
-            self.face_up = True
+            self.back_img = pygame.transform.rotate(self.back_img, 270)
+            self.img = pygame.transform.rotate(self.img, 270)
+            self.face_up = False
         if cardnumber == 3:
             self.x = 20
             self.y = 250
-            self.img = pygame.transform.rotate(self.back_img, 270)
-            self.face_up = True
+            self.back_img = pygame.transform.rotate(self.back_img, 270)
+            self.img = pygame.transform.rotate(self.img, 270)
+            self.face_up = False
         if cardnumber == 4:
             self.x = 550
             self.y = 20
-            self.img = pygame.transform.rotate(self.back_img, 180)
-            self.face_up = True
+            self.face_up = False
         if cardnumber == 5:
             self.x = 700
             self.y = 20
-            self.img = pygame.transform.rotate(self.back_img, 180)
-            self.face_up = True
+            self.face_up = False
         if cardnumber == 6:
             self.x = 1200
             self.y = 250
-            self.img = pygame.transform.rotate(self.back_img, 90)
-            self.face_up = True
+            self.back_img = pygame.transform.rotate(self.back_img, 90)
+            self.img = pygame.transform.rotate(self.img, 90)
+            self.face_up = False
         if cardnumber == 7:
             self.x = 1200
             self.y = 400
-            self.img = pygame.transform.rotate(self.back_img, 90)
-            self.face_up = True
+            self.back_img = pygame.transform.rotate(self.back_img, 90)
+            self.img = pygame.transform.rotate(self.img, 90)
+            self.face_up = False
         if cardnumber == 8:
             self.x = 325
             self.y = 300
@@ -148,7 +150,25 @@ class Card:
             self.y = 300
             self.face_up = False
 
-    def draw(self):
+    def draw(self, round):
+        if round == 1:
+            pass
+        if round == 2:
+            if 8 <= self.cardnumber <= 10:
+                self.face_up = True
+        if round == 3:
+            if self.cardnumber == 11:
+                self.face_up = True
+        if round == 4:
+            if self.cardnumber == 12:
+                self.face_up = True
+        if round == 5:
+            if 2 <= self.cardnumber <= 7:
+                self.face_up = True
+
+
+
+
         if self.face_up == True:
             self.screen.blit(self.img, (self.x, self.y))
         else:
