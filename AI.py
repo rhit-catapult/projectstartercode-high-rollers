@@ -36,13 +36,13 @@ class AI:
             self.image = cowboy
             self.my_cards = [2, 3]
         if self.ai_number == 2:
-            self.x = 1000
-            self.y = 650
-            self.image = grad_hat
+            self.x = 1230
+            self.y = 50
+            self.image = tophat
             self.my_cards = [4, 5]
 
     def draw(self):
         screen.blit(self.image, (self.x, self.y))
 
     def bet(self):
-
+        pass

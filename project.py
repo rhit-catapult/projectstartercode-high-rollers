@@ -3,6 +3,7 @@ import sys
 import random
 import time
 import card
+import AI
 
 image_size = (200, 200)
 cowboy = pygame.image.load("cowboy_hat.png")
@@ -25,6 +26,9 @@ def main():
     clock = pygame.time.Clock()
     game_round = 0
     turn = 1
+    ai0 = AI.AI(screen, 0)
+    ai1 = AI.AI(screen, 1)
+    ai2 = AI.AI(screen, 2)
 
     cards_main_list = []
     for k in range(13):
@@ -46,6 +50,10 @@ def main():
             ddd.draw(game_round)
 
         screen.blit(grad_hat, (1000, 650))
+        ai0.draw()
+        ai1.draw()
+        ai2.draw()
+
 
         pygame.display.update()
 
