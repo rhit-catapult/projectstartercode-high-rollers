@@ -3,6 +3,7 @@ import random
 import sys
 import time
 import card
+import handvalue
 
 pygame.init()
 screen = pygame.display.set_mode((1400, 800))
@@ -28,21 +29,28 @@ class AI:
         if self.ai_number == 0:
             self.x = 0
             self.y = 590
-            self.image = fedora
             self.my_cards = [2, 3]
+            self.image = fedora
         if self.ai_number == 1:
             self.x = 200
             self.y = -50
+            self.my_cards = [4, 5]
             self.image = cowboy
-            self.my_cards = [2, 3]
         if self.ai_number == 2:
             self.x = 1230
             self.y = 50
+            self.my_cards = [5, 6]
             self.image = tophat
-            self.my_cards = [4, 5]
 
     def draw(self):
         screen.blit(self.image, (self.x, self.y))
 
     def bet(self):
         pass
+
+
+    def hand_check(self, main_card_list):
+        self.my_card_list = []
+        for card in self.my_cards:
+            self.my_card_list.append(main_card_list[card])
+        print(self.my_card_list)

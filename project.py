@@ -5,6 +5,7 @@ import time
 import card
 import AI
 import chip_counter
+import handvalue
 
 image_size = (200, 200)
 cowboy = pygame.image.load("cowboy_hat.png")
@@ -32,7 +33,7 @@ def main():
     ai0 = AI.AI(screen, 0)
     ai1 = AI.AI(screen, 1)
     ai2 = AI.AI(screen, 2)
-    players_chips = chip_counter.ChipCounter( screen, 500, 750)
+    players_chips = chip_counter.ChipCounter(screen, 500, 750)
 
 
     cards_main_list = []
@@ -49,9 +50,8 @@ def main():
             if event.type == pygame.KEYDOWN:
                 players_chips.update(-2)
 
-        if round == 5:
-
-            pass
+       # if round == 5:
+        ai0.hand_check(card.cards)
 
 
         screen.fill((53, 101, 57))
