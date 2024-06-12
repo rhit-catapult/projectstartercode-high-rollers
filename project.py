@@ -68,5 +68,5 @@ def main():
 
 
         pygame.display.update()
-
-main()
+if __name__ == "__main__":
+    main()
