@@ -30,25 +30,25 @@ value_index.update({"2": 2,
                     "ace": 14})
 class Hand:
     def __init__(self):
-        pass
-
+        self.level = 0
+        self.hand_cards = []
     def set_cards(self, card_list):
         self.hand_cards = card_list
-
+        self.level = 0
 
 
     def hand_value(self):
         suites = []
         values = []
-        level = 0
         index = [0, 1, 2, 3, 4, 5, 6]
-        highest_card = 0
+        self.highest_card = 0
 
         for card in self.hand_cards:
             suites.append(card[1])
             values.append(card[0])
         print(suites)
         print(values)
+        self.high_card(values)
         pair = self.is_pair(values, index)
         if pair != 0:
             level = pair
@@ -58,7 +58,7 @@ class Hand:
         straight = self.is_straight(values)
         if straight != 0:
             level = straight
-        flush = self.is_flush(suites)
+        flush = self.is_flush()
         if flush != 0:
             level = flush
         full_house = self.is_full_house(values)
@@ -72,7 +72,16 @@ class Hand:
             level = straight_flush
 
         print(level)
-
+        print(self.highest_card)
+    def high_card(self, values):
+        values_int = []
+        for k in range(len(values)):
+            value = values[k]
+            value_int = value_index[value]
+            values_int.append(value_int)
+        values_int.sort(reverse=True)
+        self.highest_card = values_int[0]
+        self.level = 0
 
     def is_pair(self, values, index):
         pair_card = -1
@@ -85,8 +94,15 @@ class Hand:
                         if values[k] == values[p]:
                             if level == 1:
                                 level = 2
+                                value = values[k]
+                                value_int = value_index[value]
+                                if value_int > self.highest_card:
+                                    self.highest_card = value_int
                             if level == 0:
                                 level = 1
+                                value = values[k]
+                                value_int = value_index[value]
+                                self.highest_card = value_int
         return level
     def is_3(self, values, index):
         level = 0
@@ -98,6 +114,9 @@ class Hand:
                     if not l == h and not h == k and not l == k:
                         if values[k] == values[p] == values[q]:
                             level = 3
+                            value = values[k]
+                            value_int = value_index[value]
+                            self.highest_card = value_int
         return level
     def is_straight(self, values):
         values_int = []
@@ -119,24 +138,47 @@ class Hand:
                 straight_length += 1
                 if straight_length == 5:
                     level = 4
+                    value = values[top_card]
+                    value_int = value_index[value]
+                    self.highest_card = value_int
                     return level
 
             else:
                 top_card = k
                 straight_length = 1
         return 0
-    def is_flush(self, suites):
-        for k in range(len(suites)):
-            flush_number = 1
-            for h in range(len(suites)):
-                if not h == k:
-                    if suites[k] == suites[h]:
-                        flush_number += 1
-                        if flush_number == 5:
-                            level = 5
-                            return level
-        else:
-            return 0
+    def is_flush(self):
+        values_int = []
+        hearts = []
+        diamonds = []
+        spades = []
+        clubs = []
+
+        for card in self.hand_cards:
+            if card[1] == "hearts":
+                hearts.append(card)
+            if card[1] == "diamonds":
+                diamonds.append(card)
+            if card[1] == "spades":
+                spades.append(card)
+            if card[1] == "clubs":
+                clubs.append(card)
+
+        suites = [hearts, diamonds, spades, clubs]
+
+        for suite in suites:
+            if len(suite) > 4:
+                values_int = []
+                for k in range(len(suite)):
+                    card = suite[k]
+                    value = card[0]
+                    value_int = value_index[value]
+                    values_int.append(value_int)
+                values_int.sort(reverse=True)
+                level = 5
+                self.highest_card = values_int[0]
+                return level
+        return 0
 
 
         # full house
@@ -159,6 +201,7 @@ class Hand:
                 if k < len(values_int)-1 and values_int[k+1] == values_int[k]:
                     three_kind = True
                     k += 1
+                    self.highest_card = values_int[k-1]
                 else:
                     pair = True
             k += 1
@@ -177,6 +220,7 @@ class Hand:
 
         for k in range(1, len(values)-3):
             if values_int[k] == values_int[k-1] == values_int[k+1] == values_int[k+2]:
+                self.highest_card = values_int[k]
                 return 7
             else:
                 pass
