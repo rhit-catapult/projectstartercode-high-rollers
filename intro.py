@@ -12,7 +12,7 @@ def main():
     title_font = pygame.font.SysFont("timesnewroman", 40)
     instruction_font = pygame.font.SysFont("timesnewroman", 26)
     title_caption = title_font.render("Poker: Texas Hold'em edition", True, pygame.Color("WHITE"))
-    instruction_caption = instruction_font.render("Left click to check, spacebar to bet, F to fold. ", True, pygame.Color("WHITE"))
+    instruction_caption = instruction_font.render("A to check, S to raise, D to call, F to fold.", True, pygame.Color("WHITE"))
 
     clock = pygame.time.Clock()
     while True:
