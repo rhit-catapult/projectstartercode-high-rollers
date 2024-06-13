@@ -72,7 +72,6 @@ class Hand:
 
         return [self.level, self.highest_card]
 
-
     def high_card(self, values):
         values_int = []
         for k in range(len(values)):
