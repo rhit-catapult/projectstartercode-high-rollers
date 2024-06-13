@@ -6,6 +6,7 @@ import card
 import AI
 import chip_counter
 import handvalue
+import human
 
 image_size = (200, 200)
 cowboy = pygame.image.load("cowboy_hat.png")
@@ -31,6 +32,7 @@ def main():
     clock = pygame.time.Clock()
     game_round = 0
     turn = 1
+    player = human.Human(screen)
     ai0 = AI.AI(screen, 0)
     ai1 = AI.AI(screen, 1)
     ai2 = AI.AI(screen, 2)
@@ -61,6 +63,7 @@ def main():
 
         screen.blit(grad_hat, (1000, 650))
         screen.blit(poker_chip, (400,600))
+        player.draw()
         screen.blit(poker_chip, (45,65))
         screen.blit(poker_chip, (845,65))
         screen.blit(poker_chip, (1250,600))
@@ -77,6 +80,7 @@ def main():
 
 
         if game_round == 5:
+            player.hand_check(cards)
             ai0.hand_check(cards)
             ai1.hand_check(cards)
             ai2.hand_check(cards)

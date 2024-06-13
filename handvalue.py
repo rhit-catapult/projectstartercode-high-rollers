@@ -42,6 +42,7 @@ class Hand:
         values = []
         index = [0, 1, 2, 3, 4, 5, 6]
         self.highest_card = 0
+        self.level = 0
 
         for card in self.hand_cards:
             suites.append(card[1])
@@ -51,7 +52,7 @@ class Hand:
         self.high_card(values)
         pair = self.is_pair(values, index)
         if not pair == 0:
-            self. level = pair
+            self.level = pair
         three_ofa_kind = self.is_3(values, index)
         if not three_ofa_kind == 0:
             self.level = three_ofa_kind
@@ -87,7 +88,7 @@ class Hand:
         level = 0
         for k in range(len(values)):
             if not k == pair_card:
-                for h in range(len(values)):
+                for h in range(k+1, len(values)):
                     if not h == k:
                         if values[k] == values[h]:
                             if level == 1:
