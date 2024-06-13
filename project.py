@@ -34,8 +34,12 @@ def main():
     ai0 = AI.AI(screen, 0)
     ai1 = AI.AI(screen, 1)
     ai2 = AI.AI(screen, 2)
-    players_chips = chip_counter.ChipCounter(screen, 500, 750)
-    players = [player, ai0, ai1, ai2]
+    players_chips = chip_counter.ChipCounter(screen, 455, 750)
+    ai_chips1 = chip_counter.ChipCounter(screen, 100,200)
+    ai_chips2 = chip_counter.ChipCounter(screen, 900,200)
+    ai_chips3 = chip_counter.ChipCounter(screen, 1300,750)
+
+    winner = None
 
 
     cards_main_list = []
@@ -59,16 +63,26 @@ def main():
 
         screen.blit(poker_chip, (400,600))
         player.draw()
+        screen.blit(poker_chip, (45,65))
+        screen.blit(poker_chip, (845,65))
+        screen.blit(poker_chip, (1250,600))
+
+
+
         ai0.draw()
         ai1.draw()
         ai2.draw()
         players_chips.draw()
+        ai_chips1.draw()
+        ai_chips2.draw()
+        ai_chips3.draw()
+
 
         if game_round == 5:
             for player in players:
                 player.hand_check(cards)
 
-
+            break
 
 
 
