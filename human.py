@@ -11,6 +11,7 @@ class Human:
         self.grad_hat = pygame.image.load("graduation-hat.png")
         self.image = pygame.transform.scale(self.grad_hat, (200, 120))
         self.chips = 100
+        self.my_bet = 0
 
     def draw(self):
         self.screen.blit(self.image, (self.x, self.y))
@@ -20,6 +21,7 @@ class Human:
         self.my_card_list.append(self.card)
         self.card = main_card_list[1]
         self.my_card_list.append(self.card)
+        self.my_bet = 0
         for k in range(8, 13):
             self.card = main_card_list[k]
             self.my_card_list.append(self.card)
@@ -30,12 +32,22 @@ class Human:
         self.hand_level = self.my_hand[0]
         self.high_card = self.my_hand[1]
 
-    def bet(self, key):
-        print(key)
+    def bet(self, key, pay_amount):
+        self.to_pay = pay_amount
+        self.increase = 0
+        self.into_pot = 0
+
         if key == pygame.K_a:
-
+            if self.to_pay == 0:
+                self.my_bet = 0
         if key == pygame.K_s:
-
+            self.chips = self.chips - (self.to_pay + 5)
+            self.to_pay = 0
+            self.increase = 5
+            self.into_pot = self.to_pay + 5
+            self.my_bet = 1
         if key == pygame.K_d:
-
-        if key == pygame.K_f
+            self.chips -= self.to_pay
+            self.my_bet = 2
+        if key == pygame.K_f:
+           self.my_bet = 3

@@ -27,6 +27,7 @@ class AI:
         self.ai_number = ai_number
         self.my_card_list = []
         self.chips = 100
+        self.my_bet = 0
 
         if self.ai_number == 0:
             self.x = 0
@@ -43,10 +44,6 @@ class AI:
 
     def draw(self):
         screen.blit(self.image, (self.x, self.y))
-
-    def bet(self):
-        pass
-
 
     def hand_check(self, main_card_list):
         if self.ai_number == 0:
@@ -75,7 +72,116 @@ class AI:
         self.hand_level = self.my_hand[0]
         self.high_card = self.my_hand[1]
 
+    def to_do(self):
+        self.my_bet = 0
+        r = random.randint(1, 4)
+        if self.hand_level == 0:
+            if self.to_pay < 5:
+                if 1 <= r <= 3:
+                    self.my_bet = 0
+                if r == 4:
+                    self.my_bet = 1
+            if 5 <= self.to_pay <= 10:
+                if 1 <= r <= 2:
+                    self.my_bet = 3
+                if r == 3:
+                    self.my_bet = 1
+                if r == 4:
+                    self.my_bet = 2
+            if self.to_pay >= 15:
+                if 1 <= r <= 3:
+                    self.my_bet = 3
+                if r == 4:
+                    self.my_bet = 2
 
-        #print(self.my_card_list)
-        #rint(self.hand_level)
-        #print(self.high_card)
+        if self.hand_level == 1:
+            if self.to_pay < 5:
+                if 1 <= r <= 2:
+                    self.my_bet = 0
+                if 3 <= r <= 4:
+                    self.my_bet = 1
+            if 5 <= self.to_pay <= 10:
+                if 1 <= r <= 2:
+                    self.my_bet = 2
+                if r == 3:
+                    self.my_bet = 1
+                if r == 4:
+                    self.my_bet = 3
+            if self.to_pay >= 15:
+                if 1 <= r <= 2:
+                    self.my_bet = 3
+                if r == 3:
+                    self.my_bet = 2
+                if r == 4:
+                    self.my_bet = 1
+
+        if self.hand_level == 2 or self.hand_level == 3:
+            if self.to_pay < 5:
+                if 1 <= r <= 3:
+                    self.my_bet = 1
+                if r == 4:
+                    self.my_bet = 0
+            if 5 <= self.to_pay <= 10:
+                if 1 <= r <= 2:
+                    self.my_bet = 1
+                if r == 3:
+                    self.my_bet = 2
+                if r == 4:
+                    self.my_bet = 2
+            if self.to_pay >= 15:
+                if 1 <= r <= 2:
+                    self.my_bet = 2
+                if r == 3:
+                    self.my_bet = 1
+                if r == 4:
+                    self.my_bet = 3
+
+        if self.hand_level == 4 or self.hand_level == 5:
+            if self.to_pay < 5:
+                self.my_bet = 1
+            if 5 <= self.to_pay <= 10:
+                if 1 <= r <= 3:
+                    self.my_bet = 1
+                if r == 4:
+                    self.my_bet = 2
+            if self.to_pay >= 15:
+                if 1 <= r <= 2:
+                    self.my_bet = 1
+                if 3 <= r <= 4:
+                    self.my_bet = 2
+
+        if self.hand_level == 6 or self.hand_level == 7:
+            if self.to_pay < 5:
+                self.my_bet = 1
+            if 5 <= self.to_pay <= 10:
+                self.my_bet = 1
+            if self.to_pay >= 15:
+                if 1 <= r <= 3:
+                    self.my_bet = 1
+                if r == 4:
+                    self.my_bet = 2
+
+        if self.hand_level == 8:
+            self.my_bet = 1
+
+    def bet(self, pay_amount):
+        self.to_pay = pay_amount
+        self.increase = 0
+        self.into_pot = 0
+        self.to_do()
+
+
+        if self.my_bet == 0:
+            if self.to_pay == 0:
+                self.my_bet = 0
+        if self.my_bet == 1:
+                self.chips = self.chips - (self.to_pay + 5)
+                self.into_pot = self.to_pay + 5
+                self.to_pay = 0
+                self.increase = 5
+        if self.my_bet == 2:
+                self.chips -= self.to_pay
+                self.into_pot = self.to_pay
+                self.to_pay = 0
+        if self.my_bet == 3:
+                self.my_bet = 3

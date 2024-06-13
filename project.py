@@ -26,6 +26,8 @@ def main():
     pygame.display.set_caption("Poker")
     screen.fill((53, 101, 57))
     cards = card.cardlist()
+    pot = 0
+    pay_amount = 0
 
     clock = pygame.time.Clock()
     game_round = 0
@@ -38,8 +40,7 @@ def main():
     ai_chips1 = chip_counter.ChipCounter(screen, 100,200)
     ai_chips2 = chip_counter.ChipCounter(screen, 900,200)
     ai_chips3 = chip_counter.ChipCounter(screen, 1300,750)
-
-    winner = None
+    turn = 3
 
 
     cards_main_list = []
@@ -54,8 +55,49 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 game_round += 1
             if event.type == pygame.KEYDOWN:
-                players_chips.update(-2)
-                player.bet(event.key)
+                if event.key == pygame.K_SPACE:
+                    if turn == 3:
+                        turn = 0
+                    else:
+                        turn += 1
+                    print(turn)
+                if turn == 3 and not player.my_bet == 3:
+                    player.bet(event.key, pay_amount)
+                    players_chips.update(player.chips)
+                    pot += player.into_pot
+                    pay_amount += player.increase
+                    print(pot)
+                    print(pay_amount)
+                if turn == 0 and not ai0.my_bet == 3:
+                    ai0.hand_check(cards)
+                    ai0.bet(pay_amount)
+                    ai_chips1.update(ai0.chips)
+                    pot += ai0.into_pot
+                    pay_amount += ai0.increase
+                    print(ai0.my_bet)
+                    print(pay_amount)
+                    print(pot)
+                if turn == 1 and not ai1.my_bet == 3:
+                    ai1.hand_check(cards)
+                    ai1.bet(pay_amount)
+                    ai_chips2.update(ai1.chips)
+                    pot += ai1.into_pot
+                    pay_amount += ai1.increase
+                    print(ai1.my_bet)
+                    print(pay_amount)
+                    print(pot)
+                if turn == 2 and not ai2.my_bet == 3:
+                    ai2.hand_check(cards)
+                    ai2.bet(pay_amount)
+                    ai_chips3.update(ai2.chips)
+                    pot += ai1.into_pot
+                    pay_amount += ai2.increase
+                    print(ai2.my_bet)
+                    print(pay_amount)
+                    print(pot)
+
+
+
 
         screen.fill((53, 101, 57))
         for ddd in cards_main_list:
@@ -78,11 +120,11 @@ def main():
         ai_chips3.draw()
 
 
-        if game_round == 5:
-            for player in players:
-                player.hand_check(cards)
+        #if game_round == 5:
+            #for player in players:
+                #player.hand_check(cards)
 
-            break
+            #break
 
 
 

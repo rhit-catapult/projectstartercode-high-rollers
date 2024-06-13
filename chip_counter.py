@@ -16,8 +16,8 @@ class ChipCounter:
 
 
 
-    def update(self, delta):
-        self.value = delta + self.value
+    def update(self, new):
+        self.value = new
         self.caption1 = self.font1.render(str(self.value), True, (255, 255, 255))
 
 
