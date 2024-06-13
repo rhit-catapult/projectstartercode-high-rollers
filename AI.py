@@ -25,21 +25,19 @@ class AI:
     def __init__(self, screen, ai_number):
         self.screen = screen
         self.ai_number = ai_number
+        self.my_card_list = []
 
         if self.ai_number == 0:
             self.x = 0
             self.y = 590
-            self.my_cards = [2, 3]
             self.image = fedora
         if self.ai_number == 1:
             self.x = 200
             self.y = -50
-            self.my_cards = [4, 5]
             self.image = cowboy
         if self.ai_number == 2:
             self.x = 1230
             self.y = 50
-            self.my_cards = [5, 6]
             self.image = tophat
 
     def draw(self):
@@ -50,7 +48,32 @@ class AI:
 
 
     def hand_check(self, main_card_list):
-        self.my_card_list = []
-        for card in self.my_cards:
-            self.my_card_list.append(main_card_list[card])
-        print(self.my_card_list)
+        if self.ai_number == 0:
+            self.card = main_card_list[2]
+            self.my_card_list.append(self.card)
+            self.card = main_card_list[3]
+            self.my_card_list.append(self.card)
+        if self.ai_number == 1:
+            self.card = main_card_list[4]
+            self.my_card_list.append(self.card)
+            self.card = main_card_list[5]
+            self.my_card_list.append(self.card)
+        if self.ai_number == 2:
+            self.card = main_card_list[6]
+            self.my_card_list.append(self.card)
+            self.card = main_card_list[7]
+            self.my_card_list.append(self.card)
+
+        for k in range(8, 13):
+            self.card = main_card_list[k]
+            self.my_card_list.append(self.card)
+
+        hand = handvalue.Hand()
+        hand.set_cards(self.my_card_list)
+        self.my_hand = hand.hand_value()
+        self.hand_level = self.my_hand[0]
+        self.high_card = self.my_hand[1]
+
+        #print(self.my_card_list)
+        #rint(self.hand_level)
+        #print(self.high_card)

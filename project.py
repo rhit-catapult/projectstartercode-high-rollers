@@ -27,6 +27,7 @@ def main():
     pygame.display.set_caption("Poker")
     screen.fill((53, 101, 57))
     cards = card.cardlist()
+
     clock = pygame.time.Clock()
     game_round = 0
     turn = 1
@@ -34,6 +35,7 @@ def main():
     ai1 = AI.AI(screen, 1)
     ai2 = AI.AI(screen, 2)
     players_chips = chip_counter.ChipCounter(screen, 500, 750)
+    winner = None
 
 
     cards_main_list = []
@@ -49,11 +51,6 @@ def main():
                 game_round += 1
             if event.type == pygame.KEYDOWN:
                 players_chips.update(-2)
-
-       # if round == 5:
-        ai0.hand_check(card.cards)
-
-
         screen.fill((53, 101, 57))
         for ddd in cards_main_list:
             ddd.draw(game_round)
@@ -65,6 +62,12 @@ def main():
         ai2.draw()
         players_chips.draw()
 
+        if game_round == 5:
+            ai0.hand_check(cards)
+            ai1.hand_check(cards)
+            ai2.hand_check(cards)
+
+            print(ai0.hand_level)
 
 
         pygame.display.update()

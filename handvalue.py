@@ -46,33 +46,33 @@ class Hand:
         for card in self.hand_cards:
             suites.append(card[1])
             values.append(card[0])
-        print(suites)
-        print(values)
+
         self.high_card(values)
         pair = self.is_pair(values, index)
-        if pair != 0:
-            level = pair
+        if not pair == 0:
+            self. level = pair
         three_ofa_kind = self.is_3(values, index)
-        if three_ofa_kind != 0:
-            level = three_ofa_kind
+        if not three_ofa_kind == 0:
+            self.level = three_ofa_kind
         straight = self.is_straight(values)
-        if straight != 0:
-            level = straight
+        if not straight == 0:
+            self.level = straight
         flush = self.is_flush()
-        if flush != 0:
-            level = flush
+        if not flush == 0:
+            self.level = flush
         full_house = self.is_full_house(values)
-        if full_house != 0:
-            level = full_house
+        if not full_house == 0:
+            self.level = full_house
         four_kind = self.is_4(values)
-        if four_kind != 0:
-            level = four_kind
+        if not four_kind == 0:
+            self.level = four_kind
         straight_flush = self.is_straight_flush()
-        if straight_flush != 0:
-            level = straight_flush
+        if not straight_flush == 0:
+            self.level = straight_flush
 
-        print(level)
-        print(self.highest_card)
+        return [self.level, self.highest_card]
+
+
     def high_card(self, values):
         values_int = []
         for k in range(len(values)):
@@ -82,7 +82,6 @@ class Hand:
         values_int.sort(reverse=True)
         self.highest_card = values_int[0]
         self.level = 0
-
     def is_pair(self, values, index):
         pair_card = -1
         level = 0
@@ -90,8 +89,7 @@ class Hand:
             if not k == pair_card:
                 for h in range(len(values)):
                     if not h == k:
-                        p = index[h]
-                        if values[k] == values[p]:
+                        if values[k] == values[h]:
                             if level == 1:
                                 level = 2
                                 value = values[k]
@@ -109,10 +107,8 @@ class Hand:
         for k in range(len(values)):
             for h in range(len(values)):
                 for l in range(len(values)):
-                    p = index[h]
-                    q = index[l]
                     if not l == h and not h == k and not l == k:
-                        if values[k] == values[p] == values[q]:
+                        if values[k] == values[h] == values[l]:
                             level = 3
                             value = values[k]
                             value_int = value_index[value]
@@ -212,19 +208,20 @@ class Hand:
         return level
     def is_4(self, values):
         values_int = []
+        level = 0
         for k in range(len(values)):
             value = values[k]
             value_int = value_index[value]
             values_int.append(value_int)
         values_int.sort(reverse=True)
 
-        for k in range(1, len(values)-3):
+        for k in range(1, len(values)-2):
             if values_int[k] == values_int[k-1] == values_int[k+1] == values_int[k+2]:
                 self.highest_card = values_int[k]
-                return 7
+                level = 7
             else:
                 pass
-        return 0
+        return level
     def is_straight_flush(self):
         hearts = []
         diamonds = []
@@ -256,7 +253,6 @@ class Hand:
                     level = 0
 
         return level
-
 
 hand=Hand()
 hand.set_cards([["king", "diamonds"], ["king", "clubs"], ["king", "hearts"], ["4", "spades"], ["jack", "hearts"], ["jack", "diamonds"], ["10", "hearts"]])

@@ -83,8 +83,8 @@ class Card:
         self.screen = screen
         self.cardnumber = cardnumber
         self.card = cards[self.cardnumber]
-        self.suite = self.card.pop(1)
-        self.value = self.card.pop(0)
+        self.suite = self.card[1]
+        self.value = self.card[0]
         self.cardchoice = carddict[self.suite][self.value]
         self.img = pygame.image.load(f"Cards/{self.cardchoice}")
         self.back_img = pygame.image.load(f"Cards/cardBack_red4.png")
