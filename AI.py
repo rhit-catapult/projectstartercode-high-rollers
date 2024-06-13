@@ -26,6 +26,7 @@ class AI:
         self.screen = screen
         self.ai_number = ai_number
         self.my_card_list = []
+        self.chips = 100
 
         if self.ai_number == 0:
             self.x = 0

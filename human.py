@@ -1,5 +1,6 @@
 import pygame
 import handvalue
+import sys
 
 class Human:
     def __init__(self, screen):
@@ -9,6 +10,7 @@ class Human:
         self.y = 600
         self.grad_hat = pygame.image.load("graduation-hat.png")
         self.image = pygame.transform.scale(self.grad_hat, (200, 120))
+        self.chips = 100
 
     def draw(self):
         self.screen.blit(self.image, (self.x, self.y))
@@ -27,3 +29,13 @@ class Human:
         self.my_hand = hand.hand_value()
         self.hand_level = self.my_hand[0]
         self.high_card = self.my_hand[1]
+
+    def bet(self, key):
+        print(key)
+        if key == pygame.K_a:
+
+        if key == pygame.K_s:
+
+        if key == pygame.K_d:
+
+        if key == pygame.K_f

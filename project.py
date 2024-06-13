@@ -35,7 +35,7 @@ def main():
     ai1 = AI.AI(screen, 1)
     ai2 = AI.AI(screen, 2)
     players_chips = chip_counter.ChipCounter(screen, 500, 750)
-    winner = None
+    players = [player, ai0, ai1, ai2]
 
 
     cards_main_list = []
@@ -51,6 +51,8 @@ def main():
                 game_round += 1
             if event.type == pygame.KEYDOWN:
                 players_chips.update(-2)
+                player.bet(event.key)
+
         screen.fill((53, 101, 57))
         for ddd in cards_main_list:
             ddd.draw(game_round)
@@ -63,12 +65,10 @@ def main():
         players_chips.draw()
 
         if game_round == 5:
-            player.hand_check(cards)
-            ai0.hand_check(cards)
-            ai1.hand_check(cards)
-            ai2.hand_check(cards)
+            for player in players:
+                player.hand_check(cards)
 
-            break
+
 
 
 
