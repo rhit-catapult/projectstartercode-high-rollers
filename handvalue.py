@@ -33,7 +33,7 @@ class Hand:
         self.level = 0
         self.hand_cards = []
     def set_cards(self, card_list):
-        self.hand_cards = card_list
+        self.hand_cards = copy.deepcopy(card_list)
         self.level = 0
 
 
@@ -46,7 +46,8 @@ class Hand:
         for card in self.hand_cards:
             suites.append(card[1])
             values.append(card[0])
-
+        print(suites)
+        print(values)
         self.high_card(values)
         pair = self.is_pair(values, index)
         if not pair == 0:
@@ -100,6 +101,7 @@ class Hand:
                                 value = values[k]
                                 value_int = value_index[value]
                                 self.highest_card = value_int
+        print(level)
         return level
     def is_3(self, values, index):
         level = 0
@@ -112,9 +114,11 @@ class Hand:
                             value = values[k]
                             value_int = value_index[value]
                             self.highest_card = value_int
+        print(level)
         return level
     def is_straight(self, values):
         values_int = []
+        level = 0
         for k in range(len(values)):
             value = values[k]
             value_int = value_index[value]
@@ -141,13 +145,15 @@ class Hand:
             else:
                 top_card = k
                 straight_length = 1
-        return 0
+        print(level)
+        return level
     def is_flush(self):
         values_int = []
         hearts = []
         diamonds = []
         spades = []
         clubs = []
+        level = 0
 
         for card in self.hand_cards:
             if card[1] == "hearts":
@@ -173,7 +179,8 @@ class Hand:
                 level = 5
                 self.highest_card = values_int[0]
                 return level
-        return 0
+        print(level)
+        return level
 
 
         # full house
@@ -203,7 +210,7 @@ class Hand:
 
         if three_kind == True and pair == True:
             level = 6
-
+        print(level)
         return level
     def is_4(self, values):
         values_int = []
@@ -220,6 +227,7 @@ class Hand:
                 level = 7
             else:
                 pass
+        print(level)
         return level
     def is_straight_flush(self):
         hearts = []
@@ -252,7 +260,3 @@ class Hand:
                     level = 0
 
         return level
-
-hand=Hand()
-hand.set_cards([["king", "diamonds"], ["king", "clubs"], ["king", "hearts"], ["4", "spades"], ["jack", "hearts"], ["jack", "diamonds"], ["10", "hearts"]])
-hand.hand_value()

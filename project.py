@@ -68,6 +68,8 @@ def main():
             ai2.hand_check(cards)
 
             print(ai0.hand_level)
+            break
+
 
 
         pygame.display.update()
