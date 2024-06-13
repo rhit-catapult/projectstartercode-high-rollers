@@ -6,15 +6,14 @@ import card
 import AI
 import chip_counter
 import handvalue
+import human
 
 image_size = (200, 200)
 cowboy = pygame.image.load("cowboy_hat.png")
 fedora = pygame.image.load("fedora.png")
-grad_hat = pygame.image.load("graduation-hat.png")
 tophat = pygame.image.load("tophat.png")
 cowboy = pygame.transform.scale(cowboy, image_size)
 fedora = pygame.transform.scale(fedora, (150, 150))
-grad_hat = pygame.transform.scale(grad_hat, (200, 120))
 tophat = pygame.transform.scale(tophat, (150, 120))
 pokerchip = pygame.image.load("poker_chip.png")
 poker_chip = pygame.transform.scale(pokerchip,(150,150))
@@ -31,6 +30,7 @@ def main():
     clock = pygame.time.Clock()
     game_round = 0
     turn = 1
+    player = human.Human(screen)
     ai0 = AI.AI(screen, 0)
     ai1 = AI.AI(screen, 1)
     ai2 = AI.AI(screen, 2)
@@ -55,19 +55,19 @@ def main():
         for ddd in cards_main_list:
             ddd.draw(game_round)
 
-        screen.blit(grad_hat, (1000, 650))
         screen.blit(poker_chip, (400,600))
+        player.draw()
         ai0.draw()
         ai1.draw()
         ai2.draw()
         players_chips.draw()
 
         if game_round == 5:
+            player.hand_check(cards)
             ai0.hand_check(cards)
             ai1.hand_check(cards)
             ai2.hand_check(cards)
 
-            print(ai0.hand_level)
             break
 
 
