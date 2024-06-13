@@ -75,6 +75,7 @@ class AI:
         self.hand_level = self.my_hand[0]
         self.high_card = self.my_hand[1]
 
+
         #print(self.my_card_list)
         #rint(self.hand_level)
         #print(self.high_card)
