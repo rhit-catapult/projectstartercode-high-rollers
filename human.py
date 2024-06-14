@@ -45,7 +45,6 @@ class Human:
                 self.my_bet = 0
         if key == pygame.K_s:
             self.chips = self.chips - (self.to_pay-(self.has_payed) + 5)
-            self.to_pay = 0
             self.increase = 5
             self.into_pot = self.to_pay - self.has_payed + 5
             self.has_payed = self.to_pay - self.has_payed + 5
@@ -54,6 +53,7 @@ class Human:
         if key == pygame.K_d:
             self.chips -= (self.to_pay - self.has_payed)
             self.has_payed += self.to_pay - self.has_payed
+            self.into_pot = self.to_pay - self.has_payed
             self.to_pay = 0
             self.my_bet = 2
         if key == pygame.K_f:

@@ -179,16 +179,17 @@ class AI:
             if self.to_pay == 0:
                 return
         if self.my_bet == 1:
-            self.chips = self.chips - self.to_pay + self.has_payed - 5
-            self.to_pay = 0
+            self.chips -= (self.to_pay - (self.has_payed - 5))
             self.increase = 5
-            self.into_pot = self.to_pay - self.has_payed + 5
-            self.has_payed = self.to_pay - self.has_payed + 5
+            self.into_pot = self.to_pay - (self.has_payed + 5)
+            self.has_payed = self.to_pay - (self.has_payed + 5)
             self.to_pay = 0
         if self.my_bet == 2:
             self.chips -= (self.to_pay - self.has_payed)
+            self.into_pot = self.to_pay - self.has_payed
             self.has_payed += self.to_pay - self.has_payed
             self.to_pay = 0
         if self.my_bet == 3:
            pass
+        print(self.my_bet)
 

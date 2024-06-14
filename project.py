@@ -37,19 +37,21 @@ def main():
     ai_chips1 = chip_counter.ChipCounter(screen, 100,200)
     ai_chips2 = chip_counter.ChipCounter(screen, 900,200)
     ai_chips3 = chip_counter.ChipCounter(screen, 1300,750)
+    font1 = pygame.font.SysFont("timesnewroman", 28)
     turn = 3
     last_raise = -1
     last_round = 0
     game_round = -1
-    pressed_key = []
     next_turn = 3
 
     cards_main_list = []
 
     while True:
+        clock.tick(60)
         if game_round > last_round or game_round == -1:
             last_round = game_round
             turn = 3
+            last_raise = - 1
             if game_round == -1:
                 cards_main_list = []
                 cards = card.cardlist()
@@ -57,71 +59,79 @@ def main():
                 pay_amount = 0
                 for k in range(13):
                     cards_main_list.append(card.Card(screen, k, cards))
-        clock.tick(60)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
             if event.type == pygame.KEYDOWN:
-                pressed_key = pygame.key.get_pressed()
+                if event.key == pygame.K_p:
+                    game_round += 1
+                if turn == 3 and not player.my_bet == 3:
+                    if not next_turn == 0:
+                        if not last_raise == 3:
+                            player.bet(event.key, pay_amount)
+                            pot += player.into_pot
+                            pay_amount += player.increase
+                            next_turn = 0
+                            if player.my_bet == 1:
+                                last_raise = 3
+                        else:
+                            game_round += 1
+                        print(f"last_raise = {last_raise}")
+                        print(f"game_round = {game_round}")
                 if event.key == pygame.K_SPACE:
                     turn += 1
                     if turn == 4:
                         turn = 0
 
                     print(turn)
-        if turn == 3 and not player.my_bet == 3:
-            if not next_turn == 0:
-                if not last_raise == 3:
-                    player.bet(pressed_key, pay_amount)
-                    pot += player.into_pot
-                    pay_amount += player.increase
-                    next_turn = 0
-                    if player.my_bet == 1:
-                        last_raise = 3
-                else:
-                    game_round += 1
-                    turn = 3
 
         if turn == 0 and not ai0.my_bet == 3:
             if not next_turn == 1:
                 if not last_raise == 0:
                     ai0.hand_check(cards)
                     ai0.bet(pay_amount)
+                    if ai0.my_bet == 1:
+                        last_raise = 0
                     pot += ai0.into_pot
                     pay_amount += ai0.increase
                     next_turn = 1
-                    if player.my_bet == 1:
-                        last_raise = 0
                 else:
-                        game_round += 1
-                        turn = 3
+                    game_round += 1
+                print(f"last_raise = {last_raise}")
+                print(f"game_round = {game_round}")
         if turn == 1 and not ai1.my_bet == 3:
             if not next_turn == 2:
                 if not last_raise == 1:
                     ai1.hand_check(cards)
                     ai1.bet(pay_amount)
+                    if ai1.my_bet == 1:
+                        last_raise = 1
                     pot += ai1.into_pot
                     pay_amount += ai1.increase
                     next_turn = 2
-                    if player.my_bet == 1:
-                        last_raise = 1
+
                 else:
                     game_round += 1
-
+                print(f"last_raise = {last_raise}")
+                print(f"game_round = {game_round}")
         if turn == 2 and not ai2.my_bet == 3:
             if not next_turn == 3:
                 if not last_raise == 2:
                     ai2.hand_check(cards)
                     ai2.bet(pay_amount)
+                    if ai2.my_bet == 1:
+                        last_raise = 2
                     pot += ai2.into_pot
                     pay_amount += ai2.increase
                     next_turn = 3
-                    if player.my_bet == 1:
-                        last_raise = 2
                 else:
                     game_round += 1
+        if turn == 2 and pay_amount == 0:
+            game_round += 1
+            print(f"last_raise = {last_raise}")
+            print(f"game_round = {game_round}")
 
-        if game_round == 5:
+        if game_round == 4:
             player.hand_check(cards)
             ai1.hand_check(cards)
             ai2.hand_check(cards)
@@ -130,15 +140,24 @@ def main():
             hand0 = ai0.hand_level
             hand1 = ai1.hand_level
             hand2 = ai2.hand_level
+            print(hand3)
+            print(hand0)
+            print(hand1)
+            print(hand2)
 
             if hand3 > hand0 and hand3 > hand1 and hand3 > hand2:
                 player.chips += pot
+                print("player")
             if hand0 > hand3 and hand0 > hand1 and hand0 > hand2:
                 ai0.chips += pot
+                print("ai0")
             if hand1 > hand0 and hand1 > hand3 and hand1 > hand2:
                 ai1.chips += pot
+                print("ai1")
             if hand2 > hand0 and hand2 > hand1 and hand2 > hand3:
                 ai2.chips += pot
+                print("ai2")
+
 
 
 
@@ -161,6 +180,8 @@ def main():
         ai_chips1.draw(ai0.chips)
         ai_chips2.draw(ai1.chips)
         ai_chips3.draw(ai2.chips)
+        caption1= font1.render(str(pot), True, (255, 255, 255))
+        screen.blit(caption1, (1100, 400))
 
         pygame.display.update()
 

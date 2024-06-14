@@ -152,17 +152,15 @@ class Card:
 
     def draw(self, round):
         if round == 1:
-            pass
-        if round == 2:
             if 8 <= self.cardnumber <= 10:
                 self.face_up = True
-        if round == 3:
+        if round == 2:
             if self.cardnumber == 11:
                 self.face_up = True
-        if round == 4:
+        if round == 3:
             if self.cardnumber == 12:
                 self.face_up = True
-        if round == 5:
+        if round == 4:
             if 2 <= self.cardnumber <= 7:
                 self.face_up = True
 
