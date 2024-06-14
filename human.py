@@ -12,6 +12,7 @@ class Human:
         self.image = pygame.transform.scale(self.grad_hat, (200, 120))
         self.chips = 100
         self.my_bet = 0
+        self.has_payed = 0
 
     def draw(self):
         self.screen.blit(self.image, (self.x, self.y))
@@ -36,18 +37,24 @@ class Human:
         self.to_pay = pay_amount
         self.increase = 0
         self.into_pot = 0
+        if self.chips < 0:
+            self.my_bet = 3
 
         if key == pygame.K_a:
             if self.to_pay == 0:
                 self.my_bet = 0
         if key == pygame.K_s:
-            self.chips = self.chips - (self.to_pay + 5)
+            self.chips = self.chips - (self.to_pay-(self.has_payed) + 5)
             self.to_pay = 0
             self.increase = 5
-            self.into_pot = self.to_pay + 5
+            self.into_pot = self.to_pay - self.has_payed + 5
+            self.has_payed = self.to_pay - self.has_payed + 5
+            self.to_pay = 0
             self.my_bet = 1
         if key == pygame.K_d:
-            self.chips -= self.to_pay
+            self.chips -= (self.to_pay - self.has_payed)
+            self.has_payed += self.to_pay - self.has_payed
+            self.to_pay = 0
             self.my_bet = 2
         if key == pygame.K_f:
            self.my_bet = 3

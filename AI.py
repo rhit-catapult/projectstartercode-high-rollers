@@ -28,6 +28,7 @@ class AI:
         self.my_card_list = []
         self.chips = 100
         self.my_bet = 0
+        self.has_payed = 0
 
         if self.ai_number == 0:
             self.x = 0
@@ -164,24 +165,30 @@ class AI:
         if self.hand_level == 8:
             self.my_bet = 1
 
+
+
     def bet(self, pay_amount):
         self.to_pay = pay_amount
         self.increase = 0
         self.into_pot = 0
         self.to_do()
-
+        if self.chips < 0:
+            self.my_bet = 3
 
         if self.my_bet == 0:
             if self.to_pay == 0:
-                self.my_bet = 0
+                return
         if self.my_bet == 1:
-                self.chips = self.chips - (self.to_pay + 5)
-                self.into_pot = self.to_pay + 5
-                self.to_pay = 0
-                self.increase = 5
+            self.chips = self.chips - self.to_pay + self.has_payed - 5
+            self.to_pay = 0
+            self.increase = 5
+            self.into_pot = self.to_pay - self.has_payed + 5
+            self.has_payed = self.to_pay - self.has_payed + 5
+            self.to_pay = 0
         if self.my_bet == 2:
-                self.chips -= self.to_pay
-                self.into_pot = self.to_pay
-                self.to_pay = 0
+            self.chips -= (self.to_pay - self.has_payed)
+            self.has_payed += self.to_pay - self.has_payed
+            self.to_pay = 0
         if self.my_bet == 3:
-                self.my_bet = 3
+           pass
+
