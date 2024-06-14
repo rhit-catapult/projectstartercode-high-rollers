@@ -43,6 +43,7 @@ def main():
     last_round = 0
     game_round = -1
     next_turn = 3
+    caption5 = "none"
 
     cards_main_list = []
 
@@ -147,16 +148,16 @@ def main():
 
             if hand3 > hand0 and hand3 > hand1 and hand3 > hand2:
                 player.chips += pot
-                print("player")
+                caption5 = "player"
             if hand0 > hand3 and hand0 > hand1 and hand0 > hand2:
                 ai0.chips += pot
-                print("ai0")
+                caption5 = "ai0"
             if hand1 > hand0 and hand1 > hand3 and hand1 > hand2:
                 ai1.chips += pot
-                print("ai1")
+                caption5 = "ai1"
             if hand2 > hand0 and hand2 > hand1 and hand2 > hand3:
                 ai2.chips += pot
-                print("ai2")
+                caption5 = "ai2"
 
 
 
@@ -181,7 +182,11 @@ def main():
         ai_chips2.draw(ai1.chips)
         ai_chips3.draw(ai2.chips)
         caption1= font1.render(str(pot), True, (255, 255, 255))
+        caption2 = font1.render(f"turn is {turn}", True, (255, 255, 255))
+        caption3 = font1.render(f"round is {game_round}", True, (255, 255, 255))
         screen.blit(caption1, (1100, 400))
+        screen.blit(caption2, (1050, 100))
+        screen.blit(caption3, (1050, 200))
 
         pygame.display.update()
 

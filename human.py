@@ -6,7 +6,7 @@ class Human:
     def __init__(self, screen):
         self.screen = screen
         self.my_card_list = []
-        self.x = 1000
+        self.x = 900
         self.y = 600
         self.grad_hat = pygame.image.load("graduation-hat.png")
         self.image = pygame.transform.scale(self.grad_hat, (200, 120))

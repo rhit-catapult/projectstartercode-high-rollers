@@ -65,7 +65,7 @@ class Hand:
             self.level = full_house
         four_kind = self.is_4(values)
         if not four_kind == 0:
-            self.level = four_kind
+           self.level = four_kind
         straight_flush = self.is_straight_flush()
         if not straight_flush == 0:
             self.level = straight_flush
